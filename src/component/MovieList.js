@@ -8,6 +8,7 @@ import {
     FlatList,
     ActivityIndicator
 } from 'react-native';
+import Star from './Star';
 export default class MovieList extends Component {
     constructor(props) {
         super(props);
@@ -50,7 +51,7 @@ export default class MovieList extends Component {
         const { navigate } = this.props.navigation;
         const { movies } = this.state;
         return (
-            <View style={{ paddingBottom: 50 }}>
+            <View>
                 {
                     this.state.ready ? <ActivityIndicator size="large" style={styles.loadding} /> :
                         <FlatList
@@ -91,7 +92,7 @@ export default class MovieList extends Component {
                                             <Text style={styles.title}>{item.value.title}
                                             </Text>
                                             <View style={styles.star}>
-                                                {/* <Star value={item.value.rating.stars} /> */}
+                                                <Star value={item.value.rating.stars} />
                                                 {item.value.rating.stars > 0 && <Text style={styles.smallFont}>{(item.value.rating.stars / 10).toFixed(1) + '分'}</Text>}
                                             </View>
                                             <Text style={styles.smallFont}>导演：{item.value.directors[0].name}</Text>
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
       marginTop: 100
     },
     hotList: {
-      height: 130,
+       height: 130,
       paddingLeft: 10,
       paddingRight: 10,
       flexDirection: 'row',

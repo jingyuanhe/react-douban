@@ -9,6 +9,8 @@ import Icon from "react-native-vector-icons/Ionicons"
 import HotList from '../views/HotList.js'
 import Seek from '../views/Seek'
 import Mine from '../views/Mine'
+import Detail from '../views/Detail'
+import {Button} from 'react-native'
 const bottomRouteConfigs={
     MovieList:{
         screen:HotList,
@@ -62,8 +64,23 @@ const myApp=createStackNavigator({
         navigationOptions:{
             header:null
         }
-    }
-    
+    },
+    Detail:{
+        screen:Detail,
+        navigationOptions:{
+            headerTitle:'详情',
+            headerRight:<Icon name="md-share" onPress={()=>{alert('分享')}} size={22} color="#fff" style={{marginRight:15}}></Icon>,
+            headerTintColor: '#fff',
+            headerStyle: {
+                backgroundColor: '#2A362C',
+                opacity: 1,
+            },
+            headerTitleStyle: { // android 居中
+                flex: 1,
+                textAlign: 'center'
+            }
+        }
+    },
 },{
     headerMode: 'screen',
     mode: 'modal',
