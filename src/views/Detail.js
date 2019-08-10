@@ -135,6 +135,137 @@ export default class Detail extends Component {
                 </View>
               </View>
               </View>
+              <View name="performer" style={{ paddingRight: 10, paddingLeft: 10, paddingTop: 15 }}>
+              <View>
+                <Text style={{ fontSize: 12, color: '#9B9B9B' }}>影人</Text>
+              </View>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={{ marginTop: 15, marginBottom: 10, flexDirection: 'row' }}>
+                  {casts.map((x, i) => {
+                    return (
+                      <View
+                        style={{ width: 80, height: 160, justifyContent: 'center', alignItems: 'center', marginRight: 6 }}
+                        key={i}>
+                        <Image
+                          source={{ uri: x.avatars.large }}
+                          style={{ width: 80, height: 120 }} />
+                        <Text
+                          style={{ lineHeight: 22 }}
+                          numberOfLines={1}
+                          ellipsizeMode='tail'>{x.name}</Text>
+                        <Text
+                          style={{ fontSize: 12, color: '#9B9B9B' }}
+                          numberOfLines={1}
+                          ellipsizeMode='tail'></Text>
+                      </View>
+                    )
+                  })}
+                </View>
+              </ScrollView>
+            </View>
+            <View name="preview" style={{ paddingRight: 10, paddingLeft: 10, paddingTop: 15, paddingBottom: 15 }}>
+              <View>
+                <Text style={{ fontSize: 12, color: '#9B9B9B' }}>预告片/剧照</Text>
+              </View>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View style={{ marginTop: 15, flexDirection: 'row' }}>
+                  {photos.map((x, i) => {
+                    return (
+                      <View
+                        style={{ width: 140, height: 100, justifyContent: 'center', alignItems: 'center', marginRight: 6, backgroundColor: 'red' }}
+                        key={i}>
+                        <Image source={{ uri: x.image }} style={{ width: 140, height: 100 }} />
+                      </View>
+                    )
+                  })}
+                </View>
+              </ScrollView>
+            </View>
+            <View style={{ width: width, height: height, paddingTop: 25, backgroundColor: '#fff' }}>
+                  <ScrollableTabView renderTabBar={()=><DefaultTabBar></DefaultTabBar>}
+                  tabBarUnderlineStyle={{
+                    backgroundColor: '#000',
+                    height: 2
+                  }}
+                  tabBarBackgroundColor='#FFFFFF'
+                  tabBarActiveTextColor='#000'
+                  tabBarInactiveTextColor='#959595'
+                  tabBarTextStyle={{ fontSize: 14 }}
+                  locked={false}
+                  > 
+                  <View tabLabel='评论' style={{ marginBottom: 50, paddingLeft: 15, paddingRight: 15 }}>
+                  <View style={{ flexDirection: 'row', paddingTop: 20, justifyContent: 'space-between' }}>
+                    <Text>短评</Text>
+                    <TouchableOpacity style={{ borderWidth: 1, borderColor: '#3FAC00', borderRadius: 5, padding: 4 }} onPress={() => alert('你要写短评')}>
+                      <Text style={{ fontSize: 10, color: '#3FAC00' }}>写短评</Text>
+                    </TouchableOpacity>
+                  </View>
+                  {popular_comments.map((v, i) => {
+                    return (
+                      <View
+                        style={{ marginTop: 18, flexDirection: 'row', paddingRight: 20 }}
+                        key={i}>
+                        <View>
+                          <Image source={{ uri: v.author.avatar }} style={{ width: 40, height: 40, borderRadius: 20 }} />
+                        </View>
+                        <View style={{ marginLeft: 10, flex: 1 }}>
+                          <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ lineHeight: 25 }}>{v.author.name}</Text>
+                            <View style={{ marginTop: 8, marginLeft: 4 }}>
+                              <Star value={v.rating.value + '0'} width={10} height={10} />
+                            </View>
+                          </View>
+                          <Text style={{ marginBottom: 8, color: '#3B3B3B' }}>{v.content}</Text>
+                          <Text style={styles.smallFont}>
+                            4天前
+                              </Text>
+                        </View>
+
+                        <View style={{ position: 'absolute', right: 0, top: 0 }}>
+                          <Text style={{ color: '#9B9B9B' }}>👍{v.useful_count}</Text>
+                        </View>
+                      </View>
+                    )
+                  })}
+                  </View>
+                  <View tabLabel='讨论区' style={{ marginBottom: 50, paddingLeft: 15, paddingRight: 15 }}>
+                  <View style={{ flexDirection: 'row', paddingTop: 20, justifyContent: 'space-between' }}>
+                    <Text>话题</Text>
+                    <TouchableOpacity style={{ borderWidth: 1, borderColor: '#3FAC00', borderRadius: 5, padding: 4 }} onPress={() => alert('你要写话题')}>
+                      <Text style={{ fontSize: 10, color: '#3FAC00' }}>写话题</Text>
+                    </TouchableOpacity>
+                  </View>
+                  {popular_comments.map((v, i) => {
+                    return (
+                      <View
+                        style={{ marginTop: 18, flexDirection: 'row', paddingRight: 20 }}
+                        key={i}>
+                        <View>
+                          <Image source={{ uri: v.author.avatar }} style={{ width: 40, height: 40, borderRadius: 20 }} />
+                        </View>
+
+                        <View style={{ marginLeft: 10, flex: 1 }}>
+                          <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ lineHeight: 25 }}>{v.author.name}</Text>
+                            <View style={{ marginTop: 8, marginLeft: 4 }}>
+                              <Star value={v.rating.value + '0'} width={10} height={10} />
+                            </View>
+                          </View>
+                          <Text style={{ marginBottom: 8, color: '#3B3B3B' }}>{v.content}</Text>
+                          <Text style={styles.smallFont}>
+                            4天前
+                          </Text>
+                        </View>
+
+                        <View style={{ position: 'absolute', right: 0, top: 0 }}>
+                          <Text style={{ color: '#9B9B9B' }}>👍{v.useful_count}</Text>
+                        </View>
+                      </View>
+                    )
+                  })}
+                  </View>
+                  </ScrollableTabView>
+            </View>
             </View>
         }
       </ScrollView>
